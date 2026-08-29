@@ -21,3 +21,6 @@ class Transaction:
             f"{self.sender} -> {self.receiver}: "
             f"{self.amount}"
         )
+
+    def __repr__(self):
+        return self.__str__()

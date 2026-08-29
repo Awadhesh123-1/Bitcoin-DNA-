@@ -1,31 +1,35 @@
 from blockchain import Blockchain
-from transaction import Transaction
 
 
-blockchain = Blockchain()
+def main():
 
-transaction1 = Transaction(
-    "Alice",
-    "Bob",
-    50
-)
+    # Create a new blockchain
+    blockchain = Blockchain()
 
-transaction2 = Transaction(
-    "Bob",
-    "Charlie",
-    25
-)
+    # Add the first block
+    blockchain.add_block(
+        [
+            "Alice sends 50 BTC to Bob"
+        ]
+    )
 
-blockchain.add_block([
-    transaction1,
-    transaction2
-])
+    # Add the second block
+    blockchain.add_block(
+        [
+            "Bob sends 25 BTC to Charlie"
+        ]
+    )
 
-print("Blockchain valid:", blockchain.is_chain_valid())
+    # Print the blockchain
+    print("\n===== BITCOIN-DNA BLOCKCHAIN =====\n")
 
-print("\nNumber of blocks:")
-print(len(blockchain.chain))
+    for block in blockchain.chain:
+        print(f"Block #{block.index}")
+        print("Transactions:", block.transactions)
+        print("Previous Hash:", block.previous_hash)
+        print("Hash:", block.hash)
+        print("-" * 50)
 
-for block in blockchain.chain:
-    print("\n-------------------")
-    print(block)
+
+if __name__ == "__main__":
+    main()

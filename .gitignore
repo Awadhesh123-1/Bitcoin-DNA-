@@ -1,0 +1,10 @@
+wallet.json
+__pycache__/
+*.pyc
+
+*.bak
+*.before_reward
+*.step10
+*.step11
+*_backup.py
+*.locked

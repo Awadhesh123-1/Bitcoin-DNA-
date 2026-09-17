@@ -66,30 +66,19 @@ class Blockchain:
         self.pending_transactions.append(transaction)
         print(f"📥 Transaction added to Mempool! Pending Queue Size: {len(self.pending_transactions)}")
         return True
-    def mine_pending_transactions(self, miner_reward_address, owner_reward_address):
+
+    def mine_pending_transactions(self, miner_reward_address):
         if not self.pending_transactions:
             print("⚠️ Mempool is empty. Nothing to mine!")
             return False
 
-        miner_reward_tx = {
+        reward_tx = {
             "sender": "SYSTEM_REWARD",
             "receiver": miner_reward_address,
-            "amount": self.mining_reward // 2,
-            "reward_type": "MINER_REWARD"
+            "amount": self.mining_reward
         }
 
-        owner_reward_tx = {
-            "sender": "SYSTEM_REWARD",
-            "receiver": owner_reward_address,
-            "amount": self.mining_reward // 2,
-            "reward_type": "OWNER_REWARD"
-        }
-
-        block_transactions = (
-            list(self.pending_transactions)
-            + [miner_reward_tx, owner_reward_tx]
-        )
-
+        block_transactions = list(self.pending_transactions) + [reward_tx]
         previous_block = self.chain[-1]
 
         new_block = SecureBlock(
@@ -102,7 +91,7 @@ class Blockchain:
         self.chain.append(new_block)
         self.pending_transactions = []
 
-        # DEFENSIVE OPERATION: Mined data ko disk par save karein
+        # DEFENSIVE OPERATION: Mined data ko disk par save karein aur signature block update karein
         self.save_chain_to_disk()
         return True
 

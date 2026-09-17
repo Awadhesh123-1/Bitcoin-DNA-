@@ -1,0 +1,73 @@
+[
+    {
+        "index": 0,
+        "previous_hash": "0",
+        "transactions": [
+            {
+                "sender": "SYSTEM",
+                "receiver": "GENESIS",
+                "amount": 0
+            }
+        ],
+        "timestamp": 1789406930.198985,
+        "nonce": 63093,
+        "hash": "00006023c3ad2454447c6b00fc637b86ebdaa1d3027628f068116c79cb5895d8"
+    },
+    {
+        "index": 1,
+        "previous_hash": "00006023c3ad2454447c6b00fc637b86ebdaa1d3027628f068116c79cb5895d8",
+        "transactions": [
+            {
+                "sender": "BDNA5cc1884dd5c573f489ff197ca1a4ce000f2cc244",
+                "receiver": "MERCHANT_XYZ",
+                "amount": 25
+            },
+            {
+                "sender": "SYSTEM_REWARD",
+                "receiver": "BDNA5cc1884dd5c573f489ff197ca1a4ce000f2cc244",
+                "amount": 50
+            }
+        ],
+        "timestamp": 1789406932.0967283,
+        "nonce": 62388,
+        "hash": "000057cc203d688df1eeb4d5e5985a9738b1c19885db27a92ebaadd2725b5847"
+    },
+    {
+        "index": 2,
+        "previous_hash": "000057cc203d688df1eeb4d5e5985a9738b1c19885db27a92ebaadd2725b5847",
+        "transactions": [
+            {
+                "sender": "BDNA5cc1884dd5c573f489ff197ca1a4ce000f2cc244",
+                "receiver": "MERCHANT_XYZ",
+                "amount": 25
+            },
+            {
+                "sender": "SYSTEM_REWARD",
+                "receiver": "BDNA5cc1884dd5c573f489ff197ca1a4ce000f2cc244",
+                "amount": 50
+            }
+        ],
+        "timestamp": 1789438389.665035,
+        "nonce": 95883,
+        "hash": "0000e12e825471aeed333454f8ebf1ed1020d5699575b8c703207ec01616325c"
+    },
+    {
+        "index": 3,
+        "previous_hash": "0000e12e825471aeed333454f8ebf1ed1020d5699575b8c703207ec01616325c",
+        "transactions": [
+            {
+                "sender": "BDNA5cc1884dd5c573f489ff197ca1a4ce000f2cc244",
+                "receiver": "MERCHANT_XYZ",
+                "amount": 25
+            },
+            {
+                "sender": "SYSTEM_REWARD",
+                "receiver": "BDNA5cc1884dd5c573f489ff197ca1a4ce000f2cc244",
+                "amount": 50
+            }
+        ],
+        "timestamp": 1789568380.9564912,
+        "nonce": 109273,
+        "hash": "00000b31dd6da758cb12de26f5d056135715c3a87d2117bcd89327aa3aa00393"
+    }
+]

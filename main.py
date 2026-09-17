@@ -1,75 +1,28 @@
-from wallet import Wallet
-from blockchain import Blockchain
+from flask import Flask, jsonify, request
+import json
 
+app = Flask(__name__)
 
-# Create wallet
-wallet = Wallet()
-owner_wallet = Wallet()
-# Create blockchain
-blockchain = Blockchain()
+# Jingle Miner ko Mining Job dene ka Endpoint
+@app.route('/get_work', methods=['GET'])
+def get_work():
+    # Hardcoded/Fallback Job details aapke custom coin ke liye
+    job_data = {
+        "block_index": 1,
+        "previous_hash": "00000000000000000000000000000000",
+        "difficulty": 4
+    }
+    return jsonify(job_data), 200
 
+# Hardware jab Nonce solve kar lega toh data yahan bhejega
+@app.route('/submit_work', methods=['POST'])
+def submit_work():
+    miner_data = request.get_json()
+    nonce = miner_data.get('nonce')
+    print(f"[!] Jingle Miner found a block! Nonce received: {nonce}")
+    return jsonify({"status": "success", "message": "Block confirmed on Bitcoin-DNA!"}), 200
 
-# Create transaction
-transaction = {
-    "from": wallet.address,
-    "to": "TEST_ADDRESS",
-    "amount": 10
-}
+if __name__ == '__main__':
+    # Server ko Hotspot network par live karna (Port 8080)
+    app.run(host='0.0.0.0', port=8080)
 
-
-# Sign transaction
-signature = wallet.sign_transaction(transaction)
-
-
-# Attach signature and public key
-signed_transaction = {
-    **transaction,
-    "public_key": wallet.public_key,
-    "signature": signature
-}
-# Verify signature
-is_valid_signature = wallet.verify_signature(
-    transaction,
-    signature,
-    wallet.public_key
-)
-
-print("Signature Valid :", is_valid_signature)
-
-if not is_valid_signature:
-    print("ERROR: Invalid transaction signature")
-    exit()
-
-print("\n===== TRANSACTION =====")
-print("From      :", wallet.address)
-print("To        :", transaction["to"])
-print("Amount    :", transaction["amount"])
-print("Signed    :", bool(signature))
-
-
-# Add signed transaction to blockchain
-block_added = blockchain.add_block(
-    [signed_transaction],
-    wallet.public_key,
-    owner_wallet.address
-)
-
-print("Block Added :", block_added)
-
-print("\n===== REWARD TRANSACTIONS =====")
-
-latest_block = blockchain.chain[-1]
-
-for tx in latest_block.transactions:
-    if not isinstance(tx, dict):
-        continue
-
-    if tx.get("sender") == "SYSTEM":
-        print("Sender :", tx.get("sender"))
-        print("Receiver :", tx.get("receiver"))
-        print("Amount :", tx.get("amount"))
-        print("----------------")
-
-print("\n===== BLOCKCHAIN =====")
-print("Blocks    :", len(blockchain.chain))
-print("Valid     :", blockchain.is_chain_valid())
